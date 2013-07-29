@@ -2,24 +2,21 @@ package triaina.webview;
 
 import java.net.URLEncoder;
 import java.util.Map;
-
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import org.json.JSONObject;
 
 import triaina.commons.exception.SecurityRuntimeException;
 import triaina.commons.json.JSONConverter;
 import triaina.commons.utils.JSONObjectUtils;
 import triaina.commons.utils.UriUtils;
-import triaina.webview.DeviceBridgeProxy;
 import triaina.webview.config.BridgeObjectConfig;
 import triaina.webview.config.DomainConfig;
 import triaina.webview.entity.Error;
 import triaina.webview.entity.Params;
 import triaina.webview.entity.Result;
 import triaina.webview.exception.SkipDomainCheckRuntimeException;
-
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -183,11 +180,13 @@ public class WebViewBridge extends WebView {
     }
 
     public void resume() {
+        super.onResume();
         mDeviceBridgeProxy.resume();
     }
 
     public void pause() {
         mDeviceBridgeProxy.pause();
+        super.onPause();
     }
 
     @Override
